@@ -1,0 +1,20 @@
+{
+  "name": "socket_chat",
+  "version": "1.0.0",
+  "description": "A chat app using express and socket.io on node server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "chat",
+    "node"
+  ],
+  "author": "Revortni",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.0"
+  }
+}

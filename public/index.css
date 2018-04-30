@@ -1,0 +1,106 @@
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+    body {
+        font: 13px Helvetica, Arial;
+    }
+
+    form {
+        background: #000;
+        padding: 3px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    form input {
+        border: 0;
+        padding: 10px;
+        width: 90%;
+        margin-right: .5%;
+    }
+
+    form button {
+        width: 9%;
+        background: #98fb98;
+        border: none;
+        padding: 10px;
+    }
+
+    #messages {
+        list-style-type: none;
+        overflow-y:scroll;
+        position: absolute;
+        width:100%;
+        top: 10.5%;
+        height: 90%;
+    }
+
+    #messages li{
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 3em;
+        border-radius: 30px;
+        white-space: nowrap;
+        border-radius: 30px;
+        margin-top: 2.5;
+        margin-bottom: 2.5px;
+    }
+
+    #messages li:only-clild
+    {
+    	border-radius: 30px;
+    }
+
+/*    #messages li:first-child{
+    	border-top-left-radius:30px;
+    	border-top-right-radius: 30px;
+    }
+    #messages li:last-child{
+    	border-bottom-left-radius:30px;
+    	border-bottom-right-radius:30px;
+    }*/
+
+    .app-head{
+    	font-size: 5em;
+    	background: #7FB0E4;
+    	position: sticky;
+    	width: 100%;
+    	top:0;
+    	text-align: center;
+    }
+
+    .sent
+    {
+    	background-color: #98ff98;
+    	text-align: right;
+    	float:right;
+    	width: auto;
+    	clear:right;
+
+    }
+
+    .recieved
+    {
+    	background-color:#98fb98;
+    	text-align: left;
+    	width:auto;
+    	float:left;
+    	clear:left;
+    }
+
+    .message-bar
+    {
+    	width: 100%;
+    }
+
+    .connect
+    {
+    	text-align: center;
+    	font-size: 1px;
+    	font-style: italic;
+    	float:none;
+    }
