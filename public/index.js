@@ -1,5 +1,6 @@
 $(function(){
 	var socket=io();
+	var type=0;
 	$('#msg').focus();
 	$('form').submit(()=>{
 		var message=$('#msg').val();
@@ -21,6 +22,8 @@ $(function(){
 	});
 
 	socket.on('userConnect',(id)=>{
+		var x = document.getElementById("typing");
+		x.style.display='none';
 		var msg=document.createElement('li');
 		$(msg).addClass('connect');
 		$(msg).html(id+" has joined the chat box.");
@@ -28,10 +31,30 @@ $(function(){
 	});
 
 	socket.on('userDisconnect',(id)=>{
+
 		var msg=document.createElement('li');
 		$(msg).addClass('connect');
 		$(msg).html(id+" has left the chat box.");
 		$('#messages').append(msg);
+
 	});
 
+	socket.on('typing',(props)=>{
+		var x = document.getElementById("typing");
+		console.log(props.show);
+		x.style.display=props.show;
+		$('#typing').html(props.id+' is typing');
+	});
+
+	var timer =null;
+	$("#msg").keydown(function(){
+		clearTimeout(timer);
+		socket.emit("typing",'block');
+		timer=setTimeout(send,500);
+	});
+
+	function send()
+	{
+		socket.emit("typing",'none');
+	}
 });
