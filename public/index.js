@@ -3,8 +3,21 @@ $(function(){
 	var username;
 	if (username === undefined) {
         username = prompt("Enter a username:", "Thanos");
+        if(username === null)
+        {
+        	username="User";
+        }
         socket.emit('userConnect', username); //emit username to server
     }
+    socket.on('usercount',(count)=>{
+    	var msg=document.createElement('li');
+		$(msg).addClass('connect');
+		$(msg).html("Welcome to Chat Box,"+username);
+		$('#messages').append(msg);
+		var info =msg.cloneNode(true);
+		$(info).html(count+((count==1)?" user is currently connected":" users are currently connected"));
+		$('#messages').append(info);
+    });
 
 	$('#msg').focus();
 	$('form').submit(()=>{
@@ -33,17 +46,19 @@ $(function(){
 		$(msg).html(data.name+" has joined the chat box");
 		$('#messages').append(msg);
 		var info =msg.cloneNode(true);
-		$(info).html(data.count+" users are currently connected");
+		$(info).html(data.count+((data.count==1)?" user is currently connected":" users are currently connected"));
 		$('#messages').append(info);
 	});
 
-	socket.on('userDisconnect',(id)=>{
+	socket.on('userDisconnect',(data)=>{
 
 		var msg=document.createElement('li');
 		$(msg).addClass('connect');
-		$(msg).html(id+" has left the chat box");
-		$('#messages').append(msg);
-
+		$(msg).html(data.name+" has left the chat box");
+		$("#messages").append(msg);
+		var info = msg.cloneNode(true);
+		$(info).html(data.count+((data.count==1)?" user is currently connected":" users are currently connected"));
+		$('#messages').append(info);
 	});
 
 	socket.on('typing',(props)=>{

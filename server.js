@@ -13,10 +13,9 @@ io.on('connection',newconnection);
 
 //functions to call on connection
 function newconnection(socket){
-	console.log("called");
-	userCount++;
+	//console.log("called");
 
-	console.log("Number of users connected:"+userCount);
+	
 
 	//when user connects
 	socket.on('userConnect', (username) => {
@@ -25,8 +24,11 @@ function newconnection(socket){
             name: username,
             count: userCount,
         };
+        socket.emit('usercount',userCount);
         socket.broadcast.emit('userConnect', data);
+        userCount++;
     });
+    console.log("Number of after connect:"+userCount);
 	
 	//when user sends a message
 	socket.on('chat msg',function(data){
@@ -44,9 +46,13 @@ function newconnection(socket){
 
 	//when user disconnects from server
 	socket.on("disconnect",()=>{
-		socket.broadcast.emit('userDisconnect',userlist[socket.id]);
 		userCount--;
-		console.log("Number of users connected:"+userCount);
+		var data = {
+            name: userlist[socket.id],
+            count: userCount,
+        };
+		socket.broadcast.emit('userDisconnect',data);
+		console.log("Number of users after disconnect:"+userCount);
 	});
 }
 
