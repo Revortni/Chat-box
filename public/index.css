@@ -42,10 +42,12 @@
     }
 
     #messages {
+        
         list-style-type: none;
         width:100%;
         top: 11%;
         height: 90%;
+        margin-top: 10px;
     }
 
     #messages li{
@@ -122,9 +124,8 @@
     	font-style: italic;
         width: 100%;
         text-align:center;
-        position: relative;
         margin-bottom: 5px;
-        color:#424242   ;
+        color:#424242;
     }
 
     #typing
