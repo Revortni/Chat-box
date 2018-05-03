@@ -1,5 +1,11 @@
 $(function(){
 	var socket=io();
+	var username;
+	if (username === undefined) {
+        username = prompt("Enter a username:", "Thanos");
+        socket.emit('userConnect', username); //emit username to server
+    }
+
 	$('#msg').focus();
 	$('form').submit(()=>{
 		var message=$('#msg').val();
@@ -20,18 +26,41 @@ $(function(){
 			 // $('#messages').append($('<li>').text(msg));
 	});
 
-	socket.on('userConnect',(id)=>{
+	socket.on('userConnect',(data)=>{
+		(document.getElementById("typing")).style.display='none';
 		var msg=document.createElement('li');
 		$(msg).addClass('connect');
-		$(msg).html(id+" has joined the chat box.");
+		$(msg).html(data.name+" has joined the chat box");
 		$('#messages').append(msg);
+		var info =msg.cloneNode(true);
+		$(info).html(data.count+" users are currently connected");
+		$('#messages').append(info);
 	});
 
 	socket.on('userDisconnect',(id)=>{
+
 		var msg=document.createElement('li');
 		$(msg).addClass('connect');
-		$(msg).html(id+" has left the chat box.");
+		$(msg).html(id+" has left the chat box");
 		$('#messages').append(msg);
+
 	});
 
+	socket.on('typing',(props)=>{
+		var x = document.getElementById("typing");
+		x.style.display=props.show;
+		$('#typing').html(props.id+' is typing');
+	});
+
+	var timer =null;
+	$("#msg").keydown(function(){
+		clearTimeout(timer);
+		socket.emit("typing",'block');
+		timer=setTimeout(send,900);
+	});
+
+	function send()
+	{
+		socket.emit("typing",'none');
+	}
 });

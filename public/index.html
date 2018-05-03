@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Socket.IO chat</title>
+    <title>Socket chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="index.css"> 
@@ -14,11 +14,13 @@
     <div class="app-head" >Chat Box</div>
     <div class="message-bar">
     <ul id="messages"></ul>
+    </div>
+    <span id="typing"></span>
     <form action="">
-        <input id="msg" autocomplete="off" />
+        <input id="msg" autocomplete="off" placeholder="Type here.." />
         <button type="submit">Send</button>
     </form>
-    </div>
+    
     <script type="text/javascript" src="index.js">
     </script>
 </body>
