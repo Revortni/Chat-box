@@ -13,25 +13,28 @@ io.on('connection',newconnection);
 
 //functions to call on connection
 function newconnection(socket){
-	//console.log("called");
-
 	
-
 	//when user connects
 	socket.on('userConnect', (username) => {
         userlist[socket.id] = username;
         var data = {
             name: username,
             count: userCount,
+            id:socket.id,
         };
-        socket.emit('usercount',userCount);
+        socket.emit('usercount',data);
         socket.broadcast.emit('userConnect', data);
         userCount++;
     });
     console.log("Number of after connect:"+userCount);
 	
 	//when user sends a message
-	socket.on('chat msg',function(data){
+	socket.on('chat msg',function(msg){
+		var data={
+			msg:msg,
+			sender:userlist[socket.id],
+			id:socket.id,
+		};
 		socket.broadcast.emit('chat msg',data);
 	});
 
