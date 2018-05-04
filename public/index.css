@@ -38,6 +38,7 @@
         background: #98fb98;
         border-style: none;
         padding: 10px;
+        font-size:2em;
         border-radius: 30px;
     }
 
@@ -136,4 +137,17 @@
         height: 2vh;
         text-align: center;
         color:#424242;
+    }
+
+    .sender{
+        color:#424242;
+        text-align: left;
+        width:auto;
+        max-width: 45vw;
+        float:left;
+        clear:left;
+        font-size: 1.5em;
+        margin-left: 0.5vw;
+        margin-right:55vw;
+        margin-top: 5px;
     }
