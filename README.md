@@ -1,4 +1,4 @@
-# Socket-chat-
+# Chat-Box
 A multi user chat app using socket.io and express node packages.
 
 <h3>To run the app:</h3>
